@@ -18,7 +18,7 @@ mkdir -p /var/www/html/conf
 KEY=$(gpg --list-keys 2>/dev/null | grep pub | tail -1 | sed 's/.*\///' | awk '{{print $1}}')
 
 # Export KEY to /var/www/html/keyFile
-gpg --output /var/www/html/keyFile --armor --export $KEY
+[[ -f /var/www/html/keyFile ]] || gpg --output /var/www/html/keyFile --armor --export $KEY
 
 echo "Codename: $CODENAME
 Architectures: $ARCHITECTURES

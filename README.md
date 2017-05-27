@@ -9,7 +9,7 @@ I want to be serve up Debian packages so that others can install them.
 * __NAME__ - name for the GPG key.
 * __EMAIL__ - Email address for the GPG key
 * __CODENAME__ - APT repo codebase. For example "jessie" for Deian Jessie, or just use "all"
-* __ARCHITECTURES__ - e.g. "386 amd64"
+* __ARCHITECTURES__ - e.g. "386 amd64 armhf". These are the _supported_ architectures
 
 ## Volumes and Directories
 
@@ -21,19 +21,19 @@ I want to be serve up Debian packages so that others can install them.
 
 The Apt repository is served on port __80__
 
-## Example Use (Wih Docker)
+## Example Use (With Docker)
 
 ```
-docker run                            \
-    -e NAME='Douglas Gibbons'         \
-    -e EMAIL=doug@ something dot com  \
-    -e CODENAME=all                   \
-    -e ARCHITECTURES='386 amd64'      \
-    -p 8088:80                        \
+docker run                                  \
+    -e NAME='Douglas Gibbons'               \
+    -e EMAIL=doug@ something dot com        \
+    -e CODENAME=all                         \
+    -e ARCHITECTURES='386 amd64 armhf'      \
+    -p 8088:80                              \
     dougg/secure-apt-repository
 ```
 
-## Example Use (Wih Docker Compose)
+## Example Use (With Docker Compose)
 
 ```
 version: '2'
@@ -47,14 +47,20 @@ services:
       - "8088:80"
     volumes:
       - repo:/var/www/html
+      - key:/root/.gnupg
+      - packages:/packages
     environment:
       - NAME="Douglas Gibbons"
       - EMAIL="doug@ something dot com"
       - CODENAME=all
-      - ARCHITECTURES=386 amd64
+      - ARCHITECTURES=386 amd64 armhf
 
 volumes:
   repo:
+    driver: local
+  key:
+    driver: local
+  packages:
     driver: local
 ```
 

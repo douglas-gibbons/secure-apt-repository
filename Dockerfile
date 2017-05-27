@@ -1,6 +1,6 @@
 FROM ubuntu
 
-RUN apt-get update && apt-get -y install dpkg-dev apt-utils dpkg-sig reprepro apache2 && apt-get clean
+RUN apt-get update && apt-get -y install reprepro apache2 && apt-get clean
 RUN rm /var/www/html/index.html
 
 COPY entrypoint.sh /entrypoint.sh

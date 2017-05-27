@@ -1,7 +1,3 @@
-# secure-apt-repository
-
-_Docker image for a Secure Ubuntu/Debian APT Repository_
-
 This image creates an APT repository and serves it over HTTP. There's also a simple means of adding new packages to the repository, which takes care of all the fiddly details around GPG keys etc.
 
 ## Use case
@@ -36,7 +32,6 @@ docker run                            \
     -p 8088:80                        \
     dougg/secure-apt-repository
 ```
-
 
 ## Example Use (Wih Docker Compose)
 
@@ -102,8 +97,7 @@ add-apt-repository "deb http://172.17.0.1:8006/ all main"
 apt update
 ```
 
-
-## Problems
+## Solutions to Problems
 
 ### GPG key creation takes ages, with "Not enough random bytes available"
 
@@ -124,4 +118,3 @@ sudo rngd -r /dev/urandom
 ### /update.sh is taking ages to run
 
 Clear out the /packages directory.
-

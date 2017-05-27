@@ -11,7 +11,7 @@ services:
       - repo:/var/www/html
     environment:
       - NAME="Douglas Gibbons"
-      - EMAIL="douglas.j.gibbons@gmail.com"
+      - EMAIL="doug @ something com"
       - CODENAME=all
       - ARCHITECTURES=386 amd64
 

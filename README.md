@@ -28,13 +28,39 @@ The Apt repository is served on port __80__
 ## Example Use (Wih Docker)
 
 ```
-docker run                       \
-    -e NAME='Douglas Gibbons'    \
-    -e EMAIL=test@test.com       \
-    -e CODENAME=all              \
-    -e ARCHITECTURES='386 amd64' \
-    -p 8088:80                   \
+docker run                            \
+    -e NAME='Douglas Gibbons'         \
+    -e EMAIL=doug@ something dot com  \
+    -e CODENAME=all                   \
+    -e ARCHITECTURES='386 amd64'      \
+    -p 8088:80                        \
     dougg/secure-apt-repository
+```
+
+
+## Example Use (Wih Docker Compose)
+
+```
+version: '2'
+
+services:
+
+  apt:
+    build: .
+    restart: "no"
+    ports:
+      - "8088:80"
+    volumes:
+      - repo:/var/www/html
+    environment:
+      - NAME="Douglas Gibbons"
+      - EMAIL="doug@ something dot com"
+      - CODENAME=all
+      - ARCHITECTURES=386 amd64
+
+volumes:
+  repo:
+    driver: local
 ```
 
 ## Adding a Package to the Repository
@@ -68,7 +94,7 @@ apt update
 ```
 
 
-In this example we've bound to port 8006 on the docker host, and used "all" as ```CODENAME``` variable:
+In this example we've bound to port 8006 on the docker host, and used "all" as the ```CODENAME``` variable:
 
 ```
 wget -O - http://172.17.0.1:8006/keyFile | apt-key add -

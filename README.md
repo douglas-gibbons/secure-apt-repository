@@ -2,7 +2,7 @@ This image creates an APT repository and serves it over HTTP. There's also a sim
 
 ## Use case
 
-I want to be serve up Debian packages so that others can install them.
+I want to serve up Debian packages so that others can install them.
 
 ## Environment Variables
 
